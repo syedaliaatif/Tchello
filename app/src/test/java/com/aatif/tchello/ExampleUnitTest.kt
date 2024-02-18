@@ -1,4 +1,4 @@
-package com.aatif.trello
+package com.aatif.tchello
 
 import org.junit.Test
 

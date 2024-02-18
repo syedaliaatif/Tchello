@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Trello"
+rootProject.name = "Tchello"
 include(":app")
  

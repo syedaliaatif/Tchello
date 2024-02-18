@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.aatif.trello"
+    namespace = "com.aatif.tchello"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.aatif.trello"
+        applicationId = "com.aatif.tchello"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
