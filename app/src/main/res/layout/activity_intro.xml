@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.intro.IntroActivity">
+
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui__spacing_unit_4x"
+        android:text="@string/app_name"
+        android:textSize="@dimen/ui__spacing_unit_6x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/iv_intro_image"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/iv_intro_image_height"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_2x"
+        android:layout_marginTop="@dimen/ui__spacing_unit_2x"
+        android:src="@drawable/intro_avatar"
+        android:scaleType="centerInside"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_lets_get_started"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui__spacing_unit_2x"
+        android:textStyle="bold"
+        android:textSize="@dimen/ui__font_size_4x"
+        android:text="@string/intro_get_started_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_intro_image"/>
+
+    <TextView
+        android:id="@+id/tv_app_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui__spacing_unit_2x"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_2x"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/ui__font_size_2_5x"
+        android:text="@string/intro_app_description_text"
+        android:lineSpacingExtra="@dimen/ui__spacing_unit_1x"
+        app:layout_constraintTop_toBottomOf="@id/tv_lets_get_started"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constrainedWidth="true"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui__spacing_unit_2x"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_2x"
+        android:paddingVertical="@dimen/ui__spacing_unit_1x"
+        android:text="@string/intro_sign_in_text"
+        android:textSize="@dimen/ui__font_size_4x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_description"
+        app:layout_constrainedWidth="true"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui__spacing_unit_1x"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_2x"
+        android:paddingVertical="@dimen/ui__spacing_unit_1x"
+        android:text="@string/intro_sign_out_text"
+        android:textSize="@dimen/ui__font_size_4x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_sign_in"
+        app:layout_constrainedWidth="true"
+        style="@style/Widget.Material3.Button.OutlinedButton"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

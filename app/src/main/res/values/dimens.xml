@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splash_screen_app_name_size">70sp</dimen>
+    <dimen name="ui__spacing_unit_2x">16dp</dimen>
+    <dimen name="ui__spacing_unit_4x">32dp</dimen>
+    <dimen name="ui__spacing_unit_6x">48dp</dimen>
+    <dimen name="iv_intro_image_height">300dp</dimen>
+    <dimen name="ui__font_size_1x">8sp</dimen>
+    <dimen name="ui__font_size_4x">24sp</dimen>
+    <dimen name="ui__font_size_2x">16sp</dimen>
+    <dimen name="ui__spacing_unit_1x">8dp</dimen>
+    <dimen name="ui__font_size_3x">24sp</dimen>
+    <dimen name="ui__font_size_2_5x">20sp</dimen>
+    <dimen name="ui__spacing_unit_0_5x">4dp</dimen>
+</resources>
