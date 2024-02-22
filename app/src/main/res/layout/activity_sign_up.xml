@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.signup.SignUpActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        app:navigationIcon="@drawable/navigation_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_signup_page_description"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+        android:layout_marginTop="@dimen/ui__spacing_unit_4x"
+        android:text="@string/signup_page_description_text"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/ui__font_size_2_5x"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_sign_up"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_signup_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+        android:layout_marginTop="@dimen/ui__spacing_unit_4x"
+        app:cardElevation="@dimen/ui__spacing_unit_0_5x"
+        app:cardUseCompatPadding="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_signup_page_description"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/ui__spacing_unit_4x"
+                android:layout_marginBottom="@dimen/ui__spacing_unit_2x"
+                android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_name"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginVertical="@dimen/ui__spacing_unit_2x"
+                android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginVertical="@dimen/ui__spacing_unit_2x"
+                android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+                android:layout_marginVertical="@dimen/ui__spacing_unit_2x"
+                android:text="@string/signup_button_text"
+                android:textSize="@dimen/ui__font_size_2_5x"
+                />
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">Trello</string>
+    <string name="app_name">Tchello</string>
+    <string name="intro_get_started_text">Let\'s get started</string>
+    <string name="intro_app_description_text">Collaborate and plan together across multiple devices on Tchello\'s minimalist interface.</string>
+    <string name="intro_sign_in_text">Sign In</string>
+    <string name="intro_sign_out_text">Sign Up</string>
+    <string name="signup_toolbar_title">Sign Up</string>
+    <string name="signup_page_description_text">Enter your name, email-id and password to register with us.</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_email">Email</string>
+    <string name="signup_button_text">Sign Up</string>
 </resources>
