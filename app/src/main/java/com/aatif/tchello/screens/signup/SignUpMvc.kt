@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
 import com.aatif.tchello.R
+import com.aatif.tchello.common.getClicks
 import com.aatif.tchello.screens.common.BaseMvc
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
@@ -22,6 +25,7 @@ class SignUpMvc @Inject constructor(layoutInflater: LayoutInflater):BaseMvc(layo
     private val emailTextField: TextInputEditText by lazy{findViewById(R.id.edit_text_email) as TextInputEditText}
     private val passwordTextLayout by lazy { findViewById(R.id.text_input_layout_password) as TextInputLayout }
     private val passwordTextField: TextInputEditText by lazy{findViewById(R.id.edit_text_password) as TextInputEditText}
+    private val signUpButton : MaterialButton by lazy{findViewById(R.id.sign_up_page_action_button) as MaterialButton}
 
     /**
      * Sets listener for navigation clicks.
@@ -86,5 +90,11 @@ class SignUpMvc @Inject constructor(layoutInflater: LayoutInflater):BaseMvc(layo
     fun setPasswordTextError(error: String?){
         passwordTextLayout.error = error
     }
+
+    /**
+     * Sets listener for action button click.
+     * @param listener Listener for action button click.
+     */
+    fun signUpClicks(): Flow<Unit> = signUpButton.getClicks()
 
 }

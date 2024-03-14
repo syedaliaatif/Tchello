@@ -6,4 +6,100 @@
     android:layout_height="match_parent"
     tools:context=".screens.signin.SignInActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        app:navigationIcon="@drawable/navigation_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_signin_page_description"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+        android:layout_marginTop="@dimen/ui__spacing_unit_4x"
+        android:text="@string/signin_page_description_text"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/ui__font_size_2_5x"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_sign_in"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_signin_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+        android:layout_marginTop="@dimen/ui__spacing_unit_4x"
+        app:cardElevation="@dimen/ui__spacing_unit_0_5x"
+        app:cardUseCompatPadding="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_signin_page_description"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/ui__spacing_unit_4x"
+                android:layout_marginBottom="@dimen/ui__spacing_unit_2x"
+                android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+                app:errorEnabled="true"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginVertical="@dimen/ui__spacing_unit_2x"
+                android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+                app:errorEnabled="true"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sign_in_page_action_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+                android:layout_marginVertical="@dimen/ui__spacing_unit_2x"
+                android:text="@string/signin_button_text"
+                android:textSize="@dimen/ui__font_size_2_5x"
+                />
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
