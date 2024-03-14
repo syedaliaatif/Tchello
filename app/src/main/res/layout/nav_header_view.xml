@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="start|bottom"
+    android:orientation="vertical"
+    android:background="@drawable/nav_header_background"
+    android:paddingVertical="@dimen/ui__spacing_unit_2x"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nav_header_profile_photo_civ"
+        android:layout_width="@dimen/profile_photo_width"
+        android:layout_height="@dimen/profile_photo_height"
+        android:layout_margin="@dimen/ui__spacing_unit_2x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/nav_header_profile_name_tv"
+        app:layout_constraintVertical_bias="1"/>
+
+    <TextView
+        android:id="@+id/nav_header_profile_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_3x"
+        android:layout_marginVertical="@dimen/ui__spacing_unit_1x"
+        android:textColor="@color/white"
+        android:textSize="@dimen/ui__font_size_3x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/nav_header_profile_username_tv"
+        android:fontFamily="@font/inconsolata"
+        style="@style/TextAppearance.Material3.TitleLarge"/>
+
+    <TextView
+        android:id="@+id/nav_header_profile_username_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/ui__spacing_unit_1x"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_3x"
+        android:textColor="#C3C0C0"
+        android:textSize="@dimen/ui__font_size_2x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/inconsolata"
+        style="@style/TextAppearance.Material3.TitleMedium"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

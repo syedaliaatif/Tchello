@@ -3,14 +3,16 @@ package com.aatif.tchello.composition.activity
 import androidx.appcompat.app.AppCompatActivity
 import com.aatif.tchello.composition.application.AppComponent
 import com.aatif.tchello.composition.application.AppModule
+import com.aatif.tchello.screens.homepage.HomePageActivity
 import com.aatif.tchello.screens.intro.IntroActivity
 import com.aatif.tchello.screens.signin.SignInActivity
 import com.aatif.tchello.screens.signup.SignUpActivity
 import com.aatif.tchello.screens.splash_screen.SplashActivity
 import dagger.BindsInstance
 import dagger.Component
+import dagger.Subcomponent
 
-@Component(modules = [ActivityModule::class], dependencies = [AppComponent::class])
+@Subcomponent(modules = [ActivityModule::class])
 interface ActivityComponent {
     fun inject(activity: SplashActivity)
 
@@ -20,7 +22,9 @@ interface ActivityComponent {
 
     fun inject(activity: SignUpActivity)
 
-    @Component.Builder
+    fun inject(activity: HomePageActivity)
+
+    @Subcomponent.Builder
     interface Builder{
 
         @BindsInstance
@@ -28,7 +32,6 @@ interface ActivityComponent {
 
         fun activityModule(module: ActivityModule): Builder
 
-        fun appComponent(component: AppComponent): Builder
         fun build(): ActivityComponent
     }
 }

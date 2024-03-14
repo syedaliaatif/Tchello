@@ -4,8 +4,10 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.widget.TextView
 import com.aatif.tchello.R
+import com.aatif.tchello.common.getClicks
 import com.aatif.tchello.screens.common.BaseMvc
 import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class IntroMvc @Inject constructor(layoutInflater: LayoutInflater): BaseMvc(layoutInflater, R.layout.activity_intro) {
@@ -27,6 +29,8 @@ class IntroMvc @Inject constructor(layoutInflater: LayoutInflater): BaseMvc(layo
         }
     }
 
+    fun getSignInClicks(): Flow<Unit>  = signInButton.getClicks()
+
     /**
      * Sets listener for sign up button click.
      * @param listener Listener for sign up button click.
@@ -36,5 +40,7 @@ class IntroMvc @Inject constructor(layoutInflater: LayoutInflater): BaseMvc(layo
             listener.invoke()
         }
     }
+
+    fun getSignUpClicks(): Flow<Unit> = signUpButton.getClicks()
 
 }

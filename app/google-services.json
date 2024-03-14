@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1018523863159",
+    "project_id": "tchello-411cb",
+    "storage_bucket": "tchello-411cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018523863159:android:c9e825993439f99d021e72",
+        "android_client_info": {
+          "package_name": "com.aatif.tchello"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtnma0kWJGebRXZjl2G-QcDdNUJuUWgu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

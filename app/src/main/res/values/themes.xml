@@ -5,5 +5,15 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Trello" parent="Base.Theme.Trello" />
+    <style name="Theme.Trello" parent="Base.Theme.Trello" >
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppTheme.ToolbarStyle" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:fontFamily">@font/indie_flower</item>
+    </style>
+    <style name="AppTheme.NavHeaderStyle" parent="AppTheme.AppBarOverlay">
+        <item name="android:fontFamily">@font/yeseva_one</item>
+    </style>
 </resources>

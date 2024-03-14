@@ -12,4 +12,8 @@
     <dimen name="ui__font_size_3x">24sp</dimen>
     <dimen name="ui__font_size_2_5x">20sp</dimen>
     <dimen name="ui__spacing_unit_0_5x">4dp</dimen>
+    <dimen name="profile_photo_width">100dp</dimen>
+    <dimen name="profile_photo_height">100dp</dimen>
+    <dimen name="ui__spacing_unit_5x">40dp</dimen>
+    <dimen name="ui__spacing_unit_3x">24dp</dimen>
 </resources>

@@ -1,24 +1,27 @@
 package com.aatif.tchello.screens.splash_screen
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
+import com.aatif.tchello.common.firebase.FirebaseHandler
 import com.aatif.tchello.screens.common.BaseActivity
-import com.aatif.tchello.screens.intro.IntroActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /** Activity responsible for splash screen. It is the first activity that is launched on application launch.*/
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity<SplashMvc>() {
 
+    @Inject lateinit var firebaseHandler: FirebaseHandler
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityComponent.inject(this)
+        val newActivityLauncher = if(!isLoggedIn()) screenNavigator::navigateToIntroPage else screenNavigator::navigateToHomePage
         setContentView(mvc.root)
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
             window.insetsController?.hide(WindowInsets.Type.statusBars())
@@ -27,11 +30,12 @@ class SplashActivity : BaseActivity<SplashMvc>() {
         }
         lifecycleScope.launch {
             delay(2000)
-            val intent = Intent(applicationContext, IntroActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-            startActivity(intent)
+            newActivityLauncher.invoke(true)
         }
+    }
+
+    private fun isLoggedIn(): Boolean {
+        return firebaseHandler.isLoggedIn()
     }
 
 }
