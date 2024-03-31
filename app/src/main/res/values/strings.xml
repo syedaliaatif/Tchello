@@ -15,4 +15,13 @@
     <string name="progress_bar_title">Loading</string>
     <string name="action_profile">Profile</string>
     <string name="action_sign_out">Sign Out</string>
+    <string name="profile_email_et_label">Email</string>
+    <string name="profile_mobile_et_label">Mobile</string>
+    <string name="profile_name_et_label">Name</string>
+    <string name="profile_old_password_et_label">Current Password</string>
+    <string name="profile_toolbar_title">Profile</string>
+    <string name="profile_new_password_et_label">New Password</string>
+    <string name="profile_update_button_label">Update</string>
+    <string name="profile_update_password_button_label">Update Password</string>
+    <string name="email_update_button_label">Update Email</string>
 </resources>

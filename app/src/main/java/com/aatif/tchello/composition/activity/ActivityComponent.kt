@@ -5,6 +5,7 @@ import com.aatif.tchello.composition.application.AppComponent
 import com.aatif.tchello.composition.application.AppModule
 import com.aatif.tchello.screens.homepage.HomePageActivity
 import com.aatif.tchello.screens.intro.IntroActivity
+import com.aatif.tchello.screens.profile.ProfileActivity
 import com.aatif.tchello.screens.signin.SignInActivity
 import com.aatif.tchello.screens.signup.SignUpActivity
 import com.aatif.tchello.screens.splash_screen.SplashActivity
@@ -23,6 +24,8 @@ interface ActivityComponent {
     fun inject(activity: SignUpActivity)
 
     fun inject(activity: HomePageActivity)
+
+    fun inject(activity: ProfileActivity)
 
     @Subcomponent.Builder
     interface Builder{

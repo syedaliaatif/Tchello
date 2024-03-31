@@ -46,7 +46,7 @@ class SignUpActivity : BaseActivity<SignUpMvc>() {
 
     private fun setActionButtonListener(){
         lifecycleScope.launch {
-            mvc.signUpClicks().onEach { withContext(Dispatchers.Main){screenNavigator.showProgressBar("Sign Up", "Wait, signing you up!")} }.flatMapLatest {
+            mvc.signUpClicks().onEach { withContext(Dispatchers.Main){dialogManager.showProgressBar("Sign Up", "Wait, signing you up!")} }.flatMapLatest {
                 model.signUp().flowOn(Dispatchers.IO)
             }.collect(::handleResult)
         }
@@ -54,7 +54,7 @@ class SignUpActivity : BaseActivity<SignUpMvc>() {
 
     private suspend fun handleResult(result: FirebaseHandler.FirebaseAuthResult<*,String>)  =
         withContext(Dispatchers.Main) {
-            screenNavigator.hideProgressBar()
+            dialogManager.hideProgressBar()
             when (result) {
                 is FirebaseHandler.FirebaseAuthResult.Success -> {
                     screenNavigator.navigateToHomePage()
@@ -67,7 +67,7 @@ class SignUpActivity : BaseActivity<SignUpMvc>() {
         }
     private suspend fun showProgressBar(){
         withContext(Dispatchers.Main){
-            screenNavigator.showProgressBar("Sign Up" ,"Wait, signing you up!")
+            dialogManager.showProgressBar("Sign Up" ,"Wait, signing you up!")
         }
     }
 

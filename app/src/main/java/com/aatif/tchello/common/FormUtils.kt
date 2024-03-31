@@ -35,6 +35,15 @@ object FormUtils {
         return FormValidationResult.Success
     }
 
+    fun isValidMobile(mobile: String?): FormValidationResult {
+        if(mobile == null) return FormValidationResult.Failure("Mobile number can't be empty")
+        else if (mobile.length < 8 || mobile.length > 14)return FormValidationResult.Failure("Not a valid mobile number")
+        else if (Regex("^(\\+|[0-9])[0-9]*").matches(mobile)) {
+            return FormValidationResult.Success
+        }
+        return FormValidationResult.Failure("Not a valid number")
+    }
+
     /** Class that defines form validation results.*/
     sealed class FormValidationResult{
 

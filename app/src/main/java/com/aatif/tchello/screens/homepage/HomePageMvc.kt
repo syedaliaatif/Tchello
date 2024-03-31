@@ -1,5 +1,6 @@
 package com.aatif.tchello.screens.homepage
 
+import android.graphics.Bitmap
 import android.graphics.ColorFilter
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -47,12 +48,15 @@ class HomePageMvc @Inject constructor(layoutInflater: LayoutInflater, private va
      */
     fun toggleDrawer(){
         val isOpen = (root as DrawerLayout).isDrawerOpen(DRAWER_GRAVITY)
-        android.util.Log.d("AATIF_DBG", "$isOpen")
         if(isOpen){
             root.closeDrawer(DRAWER_GRAVITY)
         } else {
             root.openDrawer(DRAWER_GRAVITY)
         }
+    }
+
+    fun setProfilePhoto(bitmap: Bitmap?) {
+        profilePicture.setImageBitmap(bitmap)
     }
 
     companion object{
