@@ -32,7 +32,7 @@ class ProfileModel @Inject constructor(private val firebaseHandler: FirebaseHand
         return firebaseHandler.updateEmail(email = user.email)
     }
 
-    fun update(name: String? = null, email: String? = null, image: String? = null, mobile: String?=null) {
+    fun update(name: String? = null, email: String? = null, image: String? = null, mobile: String? = null) {
         synchronized(user){
             name?.let { user = user.copy(name = it) }
             email?.let { user = user.copy(email = it) }

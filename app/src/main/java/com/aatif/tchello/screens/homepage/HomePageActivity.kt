@@ -1,13 +1,16 @@
 package com.aatif.tchello.screens.homepage
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.aatif.tchello.R
 import com.aatif.tchello.common.firebase.FirebaseHandler
 import com.aatif.tchello.screens.common.BaseActivity
+import com.aatif.tchello.screens.profile.ProfileActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
@@ -20,6 +23,10 @@ import javax.inject.Inject
 class HomePageActivity : BaseActivity<HomePageMvc>() {
 
     @Inject lateinit var model: HomePageModel
+
+    private val activityForResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        setupProfile()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +60,8 @@ class HomePageActivity : BaseActivity<HomePageMvc>() {
                 withContext(Dispatchers.Main){
                     when{
                         menuItem.itemId == R.id.action_profile -> {
-                            screenNavigator.navigateToProfilePage(false)
+                            activityForResultLauncher.launch(Intent(this@HomePageActivity, ProfileActivity::class.java))
+                            //screenNavigator.navigateToProfilePage(false)
                         }
                         menuItem.itemId == R.id.action_sign_out -> {
                             model.signOut()

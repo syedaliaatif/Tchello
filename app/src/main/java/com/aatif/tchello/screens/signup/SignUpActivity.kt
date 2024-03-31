@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
@@ -84,32 +85,20 @@ class SignUpActivity : BaseActivity<SignUpMvc>() {
     }
 
     private fun setTextFieldChangeListeners(){
-        mvc.setNameTextChangeListener {
-            model.updateModel( name = it.toString())
-            val result = FormUtils.isValidName(it?.toString())
-            when(result){
-                is FormUtils.FormValidationResult.Success -> mvc.setNameTextError(null)
-                is FormUtils.FormValidationResult.Failure -> mvc.setNameTextError(result.message)
-            }
-        }
+        mvc.nameTextChanges()
+            .onEach{ model.updateModel( name = it.toString()) }
+            .flowOn(Dispatchers.Main)
+            .launchIn(lifecycleScope)
 
-        mvc.setEmailTextChangeListener {
-            model.updateModel(email = it.toString())
-            val result = FormUtils.isValidEmail(it?.toString())
-            when(result){
-                is FormUtils.FormValidationResult.Success -> mvc.setEmailTextError(null)
-                is FormUtils.FormValidationResult.Failure -> mvc.setEmailTextError(result.message)
-            }
-        }
+        mvc.emailTextChanges()
+            .onEach { model.updateModel(email = it.toString()) }
+            .flowOn(Dispatchers.Main)
+            .launchIn(lifecycleScope)
 
-        mvc.setPasswordTextChangeListener {
-            model.updateModel(password = it.toString())
-            val result = FormUtils.isValidPassword(it?.toString())
-            when(result){
-                is FormUtils.FormValidationResult.Success -> mvc.setPasswordTextError(null)
-                is FormUtils.FormValidationResult.Failure -> mvc.setPasswordTextError(result.message)
-            }
-        }
+        mvc.passwordTextChanges()
+            .onEach { model.updateModel(password = it.toString()) }
+            .flowOn(Dispatchers.Main)
+            .launchIn(lifecycleScope)
     }
 
     private fun hideKeyboardOnOutsideTouch(){

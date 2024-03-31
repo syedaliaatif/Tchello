@@ -152,7 +152,7 @@ class ProfileActivity : BaseActivity<ProfileMvc>() {
     }
 
     private fun handleImageTaken(bitmap: Bitmap?) {
-        if(bitmap == null)return
+        if(bitmap == null) return
        val stream =  ByteArrayOutputStream()
         bitmap?.compress(Bitmap.CompressFormat.JPEG, 80, stream)
         val inputStream = ByteArrayInputStream(stream.toByteArray())
