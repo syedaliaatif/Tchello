@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.profile.ProfileActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id = "@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.ToolbarStyle"/>
+
+    <FrameLayout
+        android:id="@+id/profile_picture_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_marginTop="@dimen/ui__spacing_unit_4x"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_photo"
+            android:layout_width="@dimen/profile_photo_height"
+            android:layout_height="@dimen/profile_photo_width"
+            android:layout_gravity="center"
+            android:src="@drawable/profile_photo_placeholder"
+            />
+        <ImageView
+            android:id="@+id/profile_picture_edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_edit"
+            />
+
+    </FrameLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_name_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui__spacing_unit_2x"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+        android:hint="@string/profile_name_et_label"
+        app:placeholderText="@string/profile_name_et_label"
+        app:errorEnabled="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_picture_container"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profile_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_email_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui__spacing_unit_2x"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+        android:hint="@string/profile_email_et_label"
+        app:errorEnabled="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_name_til"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profile_email_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_mobile_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui__spacing_unit_2x"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_4x"
+        android:hint="@string/profile_mobile_et_label"
+        app:errorEnabled="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_email_til"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/profile_mobile_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/update_name_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui__spacing_unit_4x"
+        android:layout_marginHorizontal="@dimen/ui__spacing_unit_10x"
+        android:text="@string/profile_update_button_label"
+        android:backgroundTint="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/profile_mobile_til"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.LargeComponent"
+        style="@style/Widget.Material3.Button.IconButton.Filled"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

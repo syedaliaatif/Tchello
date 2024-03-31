@@ -2,11 +2,14 @@ package com.aatif.tchello.navigation
 
 import android.app.Dialog
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aatif.tchello.screens.homepage.HomePageActivity
 import com.aatif.tchello.screens.intro.IntroActivity
+import com.aatif.tchello.screens.profile.ProfileActivity
 import com.aatif.tchello.screens.signin.SignInActivity
 import com.aatif.tchello.screens.signup.SignUpActivity
 import javax.inject.Inject
@@ -36,6 +39,11 @@ class ScreenNavigator @Inject constructor(
             this.flags = flag 
         })
     }
+
+    fun navigateToProfilePage(clearTask: Boolean = false){
+        val flag = getFlags(clearTask)
+        activity.startActivity(Intent(activity, ProfileActivity::class.java).apply { flags = flag })
+    }
     
     private fun getFlags(clearTask: Boolean): Int{
         return if(clearTask)(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK) else 0
@@ -47,14 +55,5 @@ class ScreenNavigator @Inject constructor(
 
     fun showShortToast(message: String){
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
-    }
-
-    fun showProgressBar(title: String, message: String) {
-        progressBar = ProgressDialog.show(activity, title, message,true,false)
-    }
-
-    fun hideProgressBar(){
-        progressBar?.cancel()
-        progressBar = null
     }
 }

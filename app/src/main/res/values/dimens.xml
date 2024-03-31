@@ -16,4 +16,5 @@
     <dimen name="profile_photo_height">100dp</dimen>
     <dimen name="ui__spacing_unit_5x">40dp</dimen>
     <dimen name="ui__spacing_unit_3x">24dp</dimen>
+    <dimen name="ui__spacing_unit_10x">80dp</dimen>
 </resources>

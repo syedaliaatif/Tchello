@@ -1,5 +1,6 @@
 package com.aatif.tchello.screens.homepage
 
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,13 +11,15 @@ import com.aatif.tchello.screens.common.BaseActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HomePageActivity : BaseActivity<HomePageMvc>() {
 
-    @Inject lateinit var firebaseHandler: FirebaseHandler
+    @Inject lateinit var model: HomePageModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +53,10 @@ class HomePageActivity : BaseActivity<HomePageMvc>() {
                 withContext(Dispatchers.Main){
                     when{
                         menuItem.itemId == R.id.action_profile -> {
-                            screenNavigator.showShortToast("Profile clicked.")
+                            screenNavigator.navigateToProfilePage(false)
                         }
                         menuItem.itemId == R.id.action_sign_out -> {
-                            firebaseHandler.signOut()
+                            model.signOut()
                             screenNavigator.navigateToIntroPage(true)
                         }
                     }
@@ -64,11 +67,24 @@ class HomePageActivity : BaseActivity<HomePageMvc>() {
 
     private fun setupProfile(){
         lifecycleScope.launch(Dispatchers.IO) {
-            val user = firebaseHandler.getUserDetails()?:return@launch
-            Log.d("AATIF_DBG", "userDetails : $user")
+            val user = model.getUserInformation()?:return@launch
             withContext(Dispatchers.Main){
                 mvc.setupUser(user)
             }
+            model.getProfilePhoto(user.image)
+                .flowOn(Dispatchers.IO)
+                .onEach {
+                    when(it){
+                        is FirebaseHandler.FirebaseAuthResult.Success -> {
+                            mvc.setProfilePhoto(BitmapFactory.decodeByteArray(it.result,0, it.result.size))
+                        }
+                        is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                            Log.d("SetupProfile", "Error while getting profile photo from the backend.")
+                        }
+                    }
+
+                }.flowOn(Dispatchers.Main)
+                .launchIn(this)
         }
     }
 

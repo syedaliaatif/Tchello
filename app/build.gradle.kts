@@ -43,6 +43,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-storage")
     api ("com.google.dagger:dagger:2.50")
     kapt("com.google.dagger:dagger-compiler:2.50")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
