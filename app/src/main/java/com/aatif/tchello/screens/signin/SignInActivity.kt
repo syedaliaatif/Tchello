@@ -8,17 +8,10 @@ import com.aatif.tchello.R
 import com.aatif.tchello.common.FormUtils
 import com.aatif.tchello.common.firebase.FirebaseHandler
 import com.aatif.tchello.screens.common.BaseActivity
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import javax.inject.Inject
 
 class SignInActivity : BaseActivity<SignInMvc>() {
@@ -69,13 +62,13 @@ class SignInActivity : BaseActivity<SignInMvc>() {
         }
     }
 
-    private suspend fun handleResult(result: FirebaseHandler.FirebaseAuthResult<*, String>){
+    private suspend fun handleResult(result: FirebaseHandler.FirebaseResult<*, String>){
         withContext(Dispatchers.Main){
             when(result){
-                is FirebaseHandler.FirebaseAuthResult.Success ->{
+                is FirebaseHandler.FirebaseResult.Success ->{
                     screenNavigator.navigateToHomePage()
                 }
-                is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                is FirebaseHandler.FirebaseResult.Failure -> {
                     screenNavigator.showShortToast(result.message.ifBlank { "Error occurred while signing you in." })
                 }
             }

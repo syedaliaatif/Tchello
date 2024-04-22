@@ -3,26 +3,16 @@ package com.aatif.tchello.screens.signup
 import android.app.Activity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.aatif.tchello.R
-import com.aatif.tchello.common.FormUtils
 import com.aatif.tchello.common.firebase.FirebaseHandler
 import com.aatif.tchello.screens.common.BaseActivity
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -53,15 +43,15 @@ class SignUpActivity : BaseActivity<SignUpMvc>() {
         }
     }
 
-    private suspend fun handleResult(result: FirebaseHandler.FirebaseAuthResult<*,String>)  =
+    private suspend fun handleResult(result: FirebaseHandler.FirebaseResult<*,String>)  =
         withContext(Dispatchers.Main) {
             dialogManager.hideProgressBar()
             when (result) {
-                is FirebaseHandler.FirebaseAuthResult.Success -> {
+                is FirebaseHandler.FirebaseResult.Success -> {
                     screenNavigator.navigateToHomePage()
                 }
 
-                is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                is FirebaseHandler.FirebaseResult.Failure -> {
                     screenNavigator.showShortToast(result.message.ifBlank { "Error occurred while signing you up." })
                 }
             }

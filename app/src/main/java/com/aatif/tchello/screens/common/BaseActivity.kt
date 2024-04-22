@@ -1,6 +1,8 @@
 package com.aatif.tchello.screens.common
 
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import com.aatif.tchello.TchelloApplication
 import com.aatif.tchello.composition.activity.ActivityComponent
@@ -26,7 +28,6 @@ open class BaseActivity <MVC: BaseMvc> : AppCompatActivity() {
 
         activityComponent =
             (application as TchelloApplication).appComponent.newActivityComponent().activity(this)
-                .activityModule(ActivityModule())
                 .build()
     }
 }

@@ -24,4 +24,7 @@
     <string name="profile_update_button_label">Update</string>
     <string name="profile_update_password_button_label">Update Password</string>
     <string name="email_update_button_label">Update Email</string>
+    <string name="add_board_button_label">Add Board</string>
+    <string name="board_name_hint">Board Name</string>
+    <string name="add_board_toolbar_title">Create board</string>
 </resources>

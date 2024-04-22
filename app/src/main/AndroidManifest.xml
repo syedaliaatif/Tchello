@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Trello"
         tools:targetApi="31">
         <activity
+            android:name=".screens.add_board.AddBoardActivity"
+            android:exported="false" />
+        <activity
             android:name=".screens.profile.ProfileActivity"
             android:exported="false" />
         <activity

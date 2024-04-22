@@ -3,22 +3,13 @@ package com.aatif.tchello.screens.signup
 import android.util.Log
 import com.aatif.tchello.common.FormUtils
 import com.aatif.tchello.common.firebase.FirebaseHandler
-import com.aatif.tchello.common.firebase.User
-import com.aatif.tchello.common.toFlow
+import com.aatif.tchello.common.model.User
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
-import java.lang.Exception
 import javax.inject.Inject
-import kotlin.math.sign
 
 class SignUpModel @Inject constructor(private val firebaseHandler: FirebaseHandler) {
 
@@ -36,19 +27,19 @@ class SignUpModel @Inject constructor(private val firebaseHandler: FirebaseHandl
         password?.let{signUpDetails = signUpDetails.copy( password = it)}
     }
 
-     fun signUp(): Flow<FirebaseHandler.FirebaseAuthResult<AuthResult, String>>{
-        if(!isValidUser()) return flow { emit(FirebaseHandler.FirebaseAuthResult.Failure("Invalide input email and password.")) }
+     fun signUp(): Flow<FirebaseHandler.FirebaseResult<AuthResult, String>>{
+        if(!isValidUser()) return flow { emit(FirebaseHandler.FirebaseResult.Failure("Invalide input email and password.")) }
         val email = signUpDetails.email
         val password = signUpDetails.password
          return firebaseHandler.signUp(email, password).onEach {
-             if(it is FirebaseHandler.FirebaseAuthResult.Success){
+             if(it is FirebaseHandler.FirebaseResult.Success){
                 createUser()?.let {
                     val result = firebaseHandler.storeUserData(it).firstOrNull()
                     when(result){
-                        is FirebaseHandler.FirebaseAuthResult.Success -> {
+                        is FirebaseHandler.FirebaseResult.Success -> {
                             logSuccess("Sucessfully logged in.")
                         }
-                        is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                        is FirebaseHandler.FirebaseResult.Failure -> {
                             logError(result.message)
                         }
                         else -> Unit

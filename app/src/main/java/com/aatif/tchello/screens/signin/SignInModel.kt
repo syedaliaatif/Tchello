@@ -2,14 +2,8 @@ package com.aatif.tchello.screens.signin
 
 import com.aatif.tchello.common.FormUtils
 import com.aatif.tchello.common.firebase.FirebaseHandler
-import com.aatif.tchello.common.toFlow
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SignInModel @Inject constructor(private val firebaseHandler: FirebaseHandler) {
@@ -35,7 +29,7 @@ class SignInModel @Inject constructor(private val firebaseHandler: FirebaseHandl
     /**
      * This returns a callback flow that notifies whether user was successfully logged in or not.
      */
-     fun signIn():Flow<FirebaseHandler.FirebaseAuthResult<AuthResult, String>> = firebaseHandler.signIn(signInDetails.email, signInDetails.password)
+     fun signIn():Flow<FirebaseHandler.FirebaseResult<AuthResult, String>> = firebaseHandler.signIn(signInDetails.email, signInDetails.password)
 
 
     /**
