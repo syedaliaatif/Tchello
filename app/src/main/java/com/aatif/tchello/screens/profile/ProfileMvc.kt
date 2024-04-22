@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import com.aatif.tchello.R
 import com.aatif.tchello.common.FormUtils
-import com.aatif.tchello.common.firebase.User
+import com.aatif.tchello.common.model.User
 import com.aatif.tchello.common.getClicks
 import com.aatif.tchello.common.image.ImageLoader
 import com.aatif.tchello.common.textChanges

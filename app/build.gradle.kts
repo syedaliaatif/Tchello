@@ -45,6 +45,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-storage")
     api ("com.google.dagger:dagger:2.50")
+    implementation("androidx.activity:activity:1.8.0")
     kapt("com.google.dagger:dagger-compiler:2.50")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("androidx.core:core-ktx:1.12.0")

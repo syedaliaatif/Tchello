@@ -3,25 +3,16 @@ package com.aatif.tchello.screens.signup
 import android.app.Activity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.aatif.tchello.R
-import com.aatif.tchello.common.FormUtils
 import com.aatif.tchello.common.firebase.FirebaseHandler
 import com.aatif.tchello.screens.common.BaseActivity
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -52,15 +43,15 @@ class SignUpActivity : BaseActivity<SignUpMvc>() {
         }
     }
 
-    private suspend fun handleResult(result: FirebaseHandler.FirebaseAuthResult<*,String>)  =
+    private suspend fun handleResult(result: FirebaseHandler.FirebaseResult<*,String>)  =
         withContext(Dispatchers.Main) {
             dialogManager.hideProgressBar()
             when (result) {
-                is FirebaseHandler.FirebaseAuthResult.Success -> {
+                is FirebaseHandler.FirebaseResult.Success -> {
                     screenNavigator.navigateToHomePage()
                 }
 
-                is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                is FirebaseHandler.FirebaseResult.Failure -> {
                     screenNavigator.showShortToast(result.message.ifBlank { "Error occurred while signing you up." })
                 }
             }
@@ -84,32 +75,20 @@ class SignUpActivity : BaseActivity<SignUpMvc>() {
     }
 
     private fun setTextFieldChangeListeners(){
-        mvc.setNameTextChangeListener {
-            model.updateModel( name = it.toString())
-            val result = FormUtils.isValidName(it?.toString())
-            when(result){
-                is FormUtils.FormValidationResult.Success -> mvc.setNameTextError(null)
-                is FormUtils.FormValidationResult.Failure -> mvc.setNameTextError(result.message)
-            }
-        }
+        mvc.nameTextChanges()
+            .onEach{ model.updateModel( name = it.toString()) }
+            .flowOn(Dispatchers.Main)
+            .launchIn(lifecycleScope)
 
-        mvc.setEmailTextChangeListener {
-            model.updateModel(email = it.toString())
-            val result = FormUtils.isValidEmail(it?.toString())
-            when(result){
-                is FormUtils.FormValidationResult.Success -> mvc.setEmailTextError(null)
-                is FormUtils.FormValidationResult.Failure -> mvc.setEmailTextError(result.message)
-            }
-        }
+        mvc.emailTextChanges()
+            .onEach { model.updateModel(email = it.toString()) }
+            .flowOn(Dispatchers.Main)
+            .launchIn(lifecycleScope)
 
-        mvc.setPasswordTextChangeListener {
-            model.updateModel(password = it.toString())
-            val result = FormUtils.isValidPassword(it?.toString())
-            when(result){
-                is FormUtils.FormValidationResult.Success -> mvc.setPasswordTextError(null)
-                is FormUtils.FormValidationResult.Failure -> mvc.setPasswordTextError(result.message)
-            }
-        }
+        mvc.passwordTextChanges()
+            .onEach { model.updateModel(password = it.toString()) }
+            .flowOn(Dispatchers.Main)
+            .launchIn(lifecycleScope)
     }
 
     private fun hideKeyboardOnOutsideTouch(){

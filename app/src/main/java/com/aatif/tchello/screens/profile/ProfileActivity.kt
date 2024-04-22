@@ -1,25 +1,18 @@
 package com.aatif.tchello.screens.profile
 
-import android.content.ContentResolver
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.webkit.MimeTypeMap
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.core.net.toFile
 import androidx.lifecycle.lifecycleScope
 import com.aatif.tchello.R
-import com.aatif.tchello.common.FormUtils
 import com.aatif.tchello.common.firebase.FirebaseHandler
 import com.aatif.tchello.common.navigationClicks
-import com.aatif.tchello.navigation.CustomDialogBuilder
 import com.aatif.tchello.screens.common.BaseActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flatMapConcat
@@ -32,7 +25,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.io.InputStream
 import javax.inject.Inject
 
@@ -111,25 +103,25 @@ class ProfileActivity : BaseActivity<ProfileMvc>() {
             .flowOn(Dispatchers.IO)
             .flatMapConcat {
                 when(it){
-                    is FirebaseHandler.FirebaseAuthResult.Success -> {
+                    is FirebaseHandler.FirebaseResult.Success -> {
                         Log.d("HandleImageSelected", "Image location is ${it.result.storage.name}")
                         model.update(image = it.result.storage.name)
                         model.updateUserDetails()
                     }
-                    is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                    is FirebaseHandler.FirebaseResult.Failure -> {
                         flow {
-                            emit(FirebaseHandler.FirebaseAuthResult.Failure(it.message))
+                            emit(FirebaseHandler.FirebaseResult.Failure(it.message))
                         }
                     }
                 }
             }.onEach {
                 dialogManager.hideProgressBar()
                 when(it) {
-                    is FirebaseHandler.FirebaseAuthResult.Success -> {
+                    is FirebaseHandler.FirebaseResult.Success -> {
                         screenNavigator.showShortToast("Succesfully update Image.")
                         onSuccess.invoke()
                     }
-                    is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                    is FirebaseHandler.FirebaseResult.Failure -> {
                         screenNavigator.showShortToast(it.message)
                     }
                 }
@@ -152,7 +144,7 @@ class ProfileActivity : BaseActivity<ProfileMvc>() {
     }
 
     private fun handleImageTaken(bitmap: Bitmap?) {
-        if(bitmap == null)return
+        if(bitmap == null) return
        val stream =  ByteArrayOutputStream()
         bitmap?.compress(Bitmap.CompressFormat.JPEG, 80, stream)
         val inputStream = ByteArrayInputStream(stream.toByteArray())
@@ -164,11 +156,11 @@ class ProfileActivity : BaseActivity<ProfileMvc>() {
     private fun updateProfile() {
         model.updateAuthEmail().flowOn(Dispatchers.IO).flatMapConcat {
             return@flatMapConcat when (it) {
-                is FirebaseHandler.FirebaseAuthResult.Success -> {
+                is FirebaseHandler.FirebaseResult.Success -> {
                     model.updateUserDetails().flowOn(Dispatchers.IO)
                 }
 
-                is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                is FirebaseHandler.FirebaseResult.Failure -> {
                     flow {
                         emit(it)
                     }
@@ -177,10 +169,10 @@ class ProfileActivity : BaseActivity<ProfileMvc>() {
         }.onEach {
             dialogManager.hideProgressBar()
             when(it){
-                is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                is FirebaseHandler.FirebaseResult.Failure -> {
                     screenNavigator.showLongToast(it.message)
                 }
-                is FirebaseHandler.FirebaseAuthResult.Success -> {
+                is FirebaseHandler.FirebaseResult.Success -> {
                     screenNavigator.showShortToast("Succesfully updated profile.")
                 }
             }
@@ -199,10 +191,10 @@ class ProfileActivity : BaseActivity<ProfileMvc>() {
                     .flowOn(Dispatchers.IO)
                     .onEach {
                         when(it) {
-                            is FirebaseHandler.FirebaseAuthResult.Failure -> {
+                            is FirebaseHandler.FirebaseResult.Failure -> {
                                 Log.d("FetchProfile", "There was an error while fetching profile photo.")
                             }
-                            is FirebaseHandler.FirebaseAuthResult.Success -> {
+                            is FirebaseHandler.FirebaseResult.Success -> {
                                 mvc.setProfilePhoto(BitmapFactory.decodeByteArray(it.result,0, it.result.size))
                             }
                         }
@@ -219,6 +211,7 @@ class ProfileActivity : BaseActivity<ProfileMvc>() {
         setupNavigationClick()
         supportActionBar?.setTitle(R.string.profile_toolbar_title)
     }
+
     private fun setupNavigationClick(){
         lifecycleScope.launch {
             withContext(Dispatchers.Main){

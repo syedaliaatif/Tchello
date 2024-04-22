@@ -1,13 +1,9 @@
 package com.aatif.tchello.screens.profile
 
-import android.graphics.Bitmap
-import com.aatif.tchello.common.FormUtils
 import com.aatif.tchello.common.firebase.FirebaseHandler
-import com.aatif.tchello.common.firebase.User
+import com.aatif.tchello.common.model.User
 import com.google.firebase.storage.UploadTask.TaskSnapshot
-import io.grpc.internal.DnsNameResolver.SrvRecord
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import java.io.InputStream
 import javax.inject.Inject
 
@@ -24,15 +20,15 @@ class ProfileModel @Inject constructor(private val firebaseHandler: FirebaseHand
         }
     }
 
-     fun updateUserDetails(): Flow<FirebaseHandler.FirebaseAuthResult<Void, String>> {
+     fun updateUserDetails(): Flow<FirebaseHandler.FirebaseResult<Void, String>> {
         return firebaseHandler.updateUserDetails(user)
     }
 
-    fun updateAuthEmail(): Flow<FirebaseHandler.FirebaseAuthResult<Void, String>>{
+    fun updateAuthEmail(): Flow<FirebaseHandler.FirebaseResult<Void, String>>{
         return firebaseHandler.updateEmail(email = user.email)
     }
 
-    fun update(name: String? = null, email: String? = null, image: String? = null, mobile: String?=null) {
+    fun update(name: String? = null, email: String? = null, image: String? = null, mobile: String? = null) {
         synchronized(user){
             name?.let { user = user.copy(name = it) }
             email?.let { user = user.copy(email = it) }
@@ -41,7 +37,7 @@ class ProfileModel @Inject constructor(private val firebaseHandler: FirebaseHand
         }
     }
 
-    fun uploadImage(stream: InputStream, extension:String): Flow<FirebaseHandler.FirebaseAuthResult<TaskSnapshot,String>>{
+    fun uploadImage(stream: InputStream, extension:String): Flow<FirebaseHandler.FirebaseResult<TaskSnapshot,String>>{
         return firebaseHandler.storeImage(stream, extension)
     }
 
