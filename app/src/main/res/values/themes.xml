@@ -16,4 +16,8 @@
     <style name="AppTheme.NavHeaderStyle" parent="AppTheme.AppBarOverlay">
         <item name="android:fontFamily">@font/yeseva_one</item>
     </style>
+    <style name="AppTheme.FabTheme" parent="ThemeOverlay.Material3.FloatingActionButton.Primary">
+        <item name="colorOnContainer">@color/white</item>
+
+    </style>
 </resources>

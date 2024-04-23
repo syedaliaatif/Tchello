@@ -1,6 +1,8 @@
 package com.aatif.tchello.screens.homepage
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.ImageView
@@ -27,7 +29,7 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class HomePageMvc @Inject constructor(layoutInflater: LayoutInflater, private val imageLoader: ImageLoader): BaseMvc(layoutInflater, R.layout.activity_home_page) {
+class HomePageMvc @Inject constructor(layoutInflater: LayoutInflater, private val imageLoader: ImageLoader, private val context: Context): BaseMvc(layoutInflater, R.layout.activity_home_page) {
 
     val toolbar by lazy{findViewById(R.id.toolbar_home_page) as Toolbar }
     private val navigation by lazy { findViewById(R.id.navigation_view) as NavigationView }
@@ -91,6 +93,10 @@ class HomePageMvc @Inject constructor(layoutInflater: LayoutInflater, private va
     fun showContent() {
         viewFlipper.displayedChild = CONTENT_ID
         loader.hide()
+    }
+
+    fun setFabIcon() {
+        fab.setImageResource(R.drawable.ic_add)
     }
 
     companion object{

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.aatif.tchello.R
 import com.aatif.tchello.common.image.ImageLoader
@@ -18,7 +19,9 @@ class BoardsAdapter(private val imageLoader: ImageLoader): RecyclerView.Adapter<
 
         fun bind(board: Board) {
             if(board.coverPhoto.isNotBlank()) {
-                imageLoader.loadImageInto(board.coverPhoto, iv)
+                imageLoader.loadImageWithFallback(board.coverPhoto, iv, R.drawable.board_list_fallback_cover)
+            } else {
+                iv.setImageDrawable(ContextCompat.getDrawable(itemView.context, R.drawable.board_list_fallback_cover))
             }
             title.text = board.name
         }

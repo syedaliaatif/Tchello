@@ -1,23 +1,45 @@
 package com.aatif.tchello.screens.add_board
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.aatif.tchello.R
 import com.aatif.tchello.common.navigationClicks
-import com.aatif.tchello.screens.add_board.AddBoardMvc
 import com.aatif.tchello.screens.common.BaseActivity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AddBoardActivity : BaseActivity<AddBoardMvc>() {
+
+    private val galleryPicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) {
+        if (it == null) {
+            return@registerForActivityResult
+        }
+       val stream = contentResolver.openInputStream(it)
+        lifecycleScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                val bitmap = BitmapFactory.decodeStream(stream)
+                withContext(Dispatchers.Main) {
+                    mvc.setCoverPhoto(bitmap = bitmap)
+                }
+            }
+        }
+    }
+
+    private val takePicturePreview = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
+        if (it == null) {
+            return@registerForActivityResult
+        }
+        mvc.setCoverPhoto(bitmap = it)
+    }
 
     @Inject lateinit var model : AddBoardModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +81,27 @@ class AddBoardActivity : BaseActivity<AddBoardMvc>() {
             }
             .flowOn(Dispatchers.Main)
             .launchIn(lifecycleScope)
+
+        mvc.getUploadPhotoButtonClicks()
+            .flatMapMerge {
+                mvc.showDialog(lifecycleScope)
+            }.onEach {
+                android.util.Log.d("AATIF_DBG", "Selected $it index value")
+                when {
+                    it == 0 -> pickFromGallery()
+                    it == 1 -> takeAPicture()
+                }
+            }
+            .flowOn(Dispatchers.Main)
+            .launchIn(lifecycleScope)
+    }
+
+    private fun pickFromGallery() {
+        galleryPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
+    private fun takeAPicture() {
+        takePicturePreview.launch(null)
     }
 
     companion object {

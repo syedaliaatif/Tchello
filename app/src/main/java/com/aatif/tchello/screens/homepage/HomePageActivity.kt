@@ -49,6 +49,7 @@ class HomePageActivity : BaseActivity<HomePageMvc>() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(getString(R.string.app_name))
         supportActionBar?.setHomeButtonEnabled(true)
+        mvc.setFabIcon()
         setNavigationClicks()
         setButtonClicks()
         setupProfile()
@@ -90,10 +91,13 @@ class HomePageActivity : BaseActivity<HomePageMvc>() {
 
     private fun setupProfile(){
         lifecycleScope.launch(Dispatchers.IO) {
-            val user = model.getUserInformation()?:return@launch
-            withContext(Dispatchers.Main){
+            val user = model.getUserInformation() ?: return@launch
+            withContext(Dispatchers.Main) {
                 mvc.setupUser(user)
             }
+        }
+        lifecycleScope.launch {
+            val user = model.getUserInformation() ?: return@launch
             model.getProfilePhoto(user.image)
                 .flowOn(Dispatchers.IO)
                 .onEach {
