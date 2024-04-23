@@ -10,6 +10,26 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:theme="@style/AppTheme.ToolbarStyle"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cover_photo_civ"
+        android:layout_width="@dimen/ui__spacing_unit_10x"
+        android:layout_height="@dimen/ui__spacing_unit_10x"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/ui__spacing_unit_2x"
+        android:src="@drawable/board_list_fallback_cover"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cover_photo_update_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="@dimen/ui__spacing_unit_2x"
+        android:paddingHorizontal="@dimen/ui__spacing_unit_2x"
+        android:paddingVertical="@dimen/ui__spacing_unit_1x"
+        android:text="@string/cover_photo_update_button_label"
+        />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/board_name_til"
         android:layout_width="match_parent"

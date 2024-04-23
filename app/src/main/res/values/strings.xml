@@ -27,4 +27,5 @@
     <string name="add_board_button_label">Add Board</string>
     <string name="board_name_hint">Board Name</string>
     <string name="add_board_toolbar_title">Create board</string>
+    <string name="cover_photo_update_button_label">Upload Photo</string>
 </resources>
